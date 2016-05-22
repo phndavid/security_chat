@@ -1,9 +1,7 @@
 package model;
 
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
@@ -42,7 +40,6 @@ public class Message implements Serializable {
             final byte[] encryptedMessage = cipher.doFinal(message.getBytes());
             out.writeObject(encryptedMessage);
             out.flush();
-            //msg.receiveAndDecryptMessage(encryptedMessage);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,8 +56,6 @@ public class Message implements Serializable {
             keyAgreement.doPhase(receivedPublicKey, true);
 
             secretKey = shortenSecretKey(keyAgreement.generateSecret());
-           /// secretKey = keyAgreement.generateSecret("AES").getEncoded();
-     
             System.out.println("Llave secretKey: "+ secretKey);
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,8 +90,6 @@ public class Message implements Serializable {
         return publicKey;
     }
 
-
-
     //~ ----------------------------------------------------------------------------------------------------------------
 
     public void receiveAndDecryptMessage(final byte[] message) {
@@ -114,9 +107,6 @@ public class Message implements Serializable {
             e.printStackTrace();
         }
     }
-
-
-
     //~ ----------------------------------------------------------------------------------------------------------------
 
     /**
@@ -128,8 +118,6 @@ public class Message implements Serializable {
 
         receivedPublicKey = msg.getPublicKey();
     }
-
-
     //~ ----------------------------------------------------------------------------------------------------------------
 
     public void whisperTheSecretMessage() {
@@ -139,8 +127,6 @@ public class Message implements Serializable {
     public String getMessage(){
     	return secretMessage;
     }
-
-
     //~ ----------------------------------------------------------------------------------------------------------------
 
     /**
@@ -159,22 +145,9 @@ public class Message implements Serializable {
     			newKey[i] = longKey[i];		
     		}
     		return newKey;
-            // Use 8 bytes (64 bits) for DES, 6 bytes (48 bits) for Blowfish
-//            final byte[] shortenedKey = new byte[15];
-//
-//            System.arraycopy(longKey, 0, shortenedKey, 0, shortenedKey.length);
-//
-//            return shortenedKey;
-
-            // Below lines can be more secure
-            //final SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("AES");
-            // final DESKeySpec       desSpec    = new DESKeySpec(longKey);
-            //
-            // return keyFactory.generateSecret(desSpec).getEncoded();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
    

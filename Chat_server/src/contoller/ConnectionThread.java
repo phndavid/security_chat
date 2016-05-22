@@ -1,11 +1,9 @@
 package contoller;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 import model.Message;
@@ -13,8 +11,7 @@ import model.Message;
 import view.WindowServer;
 
 public class ConnectionThread extends Thread{
-	public final static String MENSAJE = "mensaje";
-
+	
 	private Socket socket; 
 	private ObjectInputStream in;
 	private ObjectOutputStream out;

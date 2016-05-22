@@ -36,7 +36,7 @@ public class WindowClient extends JFrame implements ActionListener {
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		setLayout(new BorderLayout());
 		
-		txtA_conversation = new JTextArea(5,20);
+		txtA_conversation = new JTextArea(10,20);
 		JScrollPane scroll = new JScrollPane (txtA_conversation, 
 				   JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 	

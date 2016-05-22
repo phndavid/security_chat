@@ -11,18 +11,12 @@ import model.Message;
 public class ClientController {
 	
 	public final static int PORT = 6500; 
-	public final static String MENSAJE = "mensaje";
-
-
 	private static Socket socket; 
 	private static ObjectInputStream in;
 	private static ObjectOutputStream out;
 	private static WindowClient windowClient;
 	private static Message msgClient;
 	
-	public ObjectOutputStream getWritter(){
-		return out;
-	}
 	private static void comunicacionServidor() {
 		try{
 			socket = new Socket(InetAddress.getLocalHost(), PORT);
@@ -45,7 +39,7 @@ public class ClientController {
 		try {
 			in = new ObjectInputStream(socket.getInputStream());
 			Message msgServer = (Message) in.readObject();
-			System.out.println("Llave del servidor:" + msgServer.getPublicKey().toString());
+			System.out.println("Llave del servidor: " + msgServer.getPublicKey().toString());
 			//El cliente crea una llave comun usando la llave publica del servidor
 			msgClient.receivePublicKeyFrom(msgServer);
 			msgClient.generateCommonSecretKey();
@@ -76,6 +70,9 @@ public class ClientController {
 			}
 		}
 		
+	}
+	public ObjectOutputStream getWritter(){
+		return out;
 	}
 	public static void main(String[] args){
 		comunicacionServidor();		
